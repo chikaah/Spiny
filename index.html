@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spin & Earn</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Spin & Earn</h1>
+    
+    <!-- Adsterra visible banner section -->
+    <div class="ad-banner">
+      <!-- Replace this with your real Adsterra banner code -->
+      <iframe src="https://your-adsterra-banner-code" frameborder="0"></iframe>
+    </div>
+    
+    <!-- Spin wheel -->
+    <div class="wheel-section">
+      <img id="wheel" src="https://i.imgur.com/o7VZ7aE.png" alt="Wheel" />
+      <button id="spinBtn">Spin Now</button>
+    </div>
+
+    <!-- Coins -->
+    <p id="result">You have <span id="coins">0</span> coins</p>
+
+    <!-- Optional Withdraw button -->
+    <button id="withdrawBtn">Withdraw</button>
+  </div>
+
+  <!-- Invisible iframe for Smart Link -->
+  <iframe id="smartlink" src="" style="display: none;"></iframe>
+
+  <script src="script.js"></script>
+</body>
+</html>
