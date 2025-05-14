@@ -1,0 +1,59 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  margin-top: 40px;
+}
+
+h1 {
+  color: #2e86de;
+}
+
+.ad-banner iframe {
+  width: 100%;
+  height: 90px;
+  border: none;
+  margin-bottom: 15px;
+}
+
+.wheel-section {
+  position: relative;
+  margin: 20px 0;
+}
+
+#wheel {
+  width: 200px;
+  transition: transform 2s ease-out;
+}
+
+#spinBtn, #withdrawBtn {
+  background-color: #2e86de;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#spinBtn:hover, #withdrawBtn:hover {
+  background-color: #1b4f72;
+}
+
+#result {
+  font-size: 18px;
+  margin-top: 15px;
+  color: #444;
+}
