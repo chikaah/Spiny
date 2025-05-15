@@ -1,36 +1,49 @@
-let coins = 0;
-const spinBtn = document.getElementById('spinBtn');
-const wheel = document.getElementById('wheel');
-const coinsDisplay = document.getElementById('coins');
-const smartlinkFrame = document.getElementById('smartlink');
-const withdrawBtn = document.getElementById('withdrawBtn');
+let remainingSpins = 2;
+let totalWinnings = 0;
 
-// Your Adsterra smart link (replace this with yours)
-const SMART_LINK = "https://your-adsterra-smartlink.com";
+const spinBtn = document.getElementById("spinBtn");
+const addSpinBtn = document.getElementById("addSpinBtn");
+const withdrawBtn = document.getElementById("withdrawBtn");
+const spinsDisplay = document.getElementById("spins");
+const winningsDisplay = document.getElementById("winnings");
+const wheel = document.getElementById("wheel");
+const smartlinkFrame = document.getElementById("smartlink");
 
-// Function to spin the wheel
-spinBtn.addEventListener('click', () => {
-  const degree = Math.floor(720 + Math.random() * 720);
-  wheel.style.transform = `rotate(${degree}deg)`;
+const prizes = [20, 50, 70, 100, 120, 150, 200, 30]; // same count as segments on your image
 
-  // Simulate reward
-  const reward = Math.floor(Math.random() * 50) + 10;
-  coins += reward;
+spinBtn.onclick = () => {
+  if (remainingSpins <= 0) {
+    alert("No spins left. Please add more spins.");
+    return;
+  }
+
+  // Trigger hidden smart link ad click
+  smartlinkFrame.src = "https://popslowergrocer.com/ry1z6ucg?key=5c9f18e80213d8fe1aed9accdf1a3b6b&t=" + Date.now();
+
+  remainingSpins--;
+  spinsDisplay.textContent = remainingSpins;
+
+  const angle = Math.floor(3600 + Math.random() * 720);
+  wheel.style.transform = `rotate(${angle}deg)`;
+
+  const reward = prizes[Math.floor(Math.random() * prizes.length)];
 
   setTimeout(() => {
-    coinsDisplay.textContent = coins;
-    alert(`You won ${reward} coins!`);
-  }, 2000); // matches wheel spin duration
+    totalWinnings += reward;
+    winningsDisplay.textContent = totalWinnings;
+    alert(`You won ₹${reward}`);
+  }, 3000);
+};
 
-  // Trigger invisible smart link click
-  smartlinkFrame.src = SMART_LINK + "?t=" + new Date().getTime(); // bypass caching
-});
+addSpinBtn.onclick = () => {
+  remainingSpins += 1;
+  spinsDisplay.textContent = remainingSpins;
+};
 
-// Fake Withdraw
-withdrawBtn.addEventListener('click', () => {
-  if (coins >= 1000) {
-    alert("Success! Withdrawal request sent.");
+withdrawBtn.onclick = () => {
+  if (totalWinnings >= 1000) {
+    alert("Withdrawal successful!");
   } else {
-    alert("You need at least 1000 coins to withdraw.");
+    alert("You need ₹1000 to withdraw.");
   }
-});
+};
