@@ -9,28 +9,31 @@
 <body>
   <div class="container">
     <h1>Spin & Earn</h1>
-    
-    <!-- Adsterra visible banner section -->
-    <div class="ad-banner">
-      <!-- Replace this with your real Adsterra banner code -->
-      <iframe src="https://your-adsterra-banner-code" frameborder="0"></iframe>
-    </div>
-    
-    <!-- Spin wheel -->
-    <div class="wheel-section">
-      <img id="wheel" src="https://i.imgur.com/o7VZ7aE.png" alt="Wheel" />
-      <button id="spinBtn">Spin Now</button>
+
+    <!-- Spins & Winnings -->
+    <div class="stats">
+      <div><strong id="spins">2</strong><br/>Remaining Spin</div>
+      <div><strong id="winnings">0</strong><br/>Winnings</div>
     </div>
 
-    <!-- Coins -->
-    <p id="result">You have <span id="coins">0</span> coins</p>
-
-    <!-- Optional Withdraw button -->
+    <button id="addSpinBtn">Add Spin</button>
     <button id="withdrawBtn">Withdraw</button>
+
+    <!-- Adsterra Banner -->
+    <div class="ad-banner">
+      <script async="async" data-cfasync="false" src="//popslowergrocer.com/f6483c45a76970bebdf173069e56f10e/invoke.js"></script>
+      <div id="container-f6483c45a76970bebdf173069e56f10e"></div>
+    </div>
+
+    <!-- Wheel -->
+    <div class="wheel-section">
+      <img id="wheel" src="wheel.png" alt="Spin Wheel" />
+      <button id="spinBtn">SPIN NOW</button>
+    </div>
   </div>
 
-  <!-- Invisible iframe for Smart Link -->
-  <iframe id="smartlink" src="" style="display: none;"></iframe>
+  <!-- Hidden Adsterra Smartlink Trigger -->
+  <iframe id="smartlink" style="display:none;"></iframe>
 
   <script src="script.js"></script>
 </body>
