@@ -1,63 +1,39 @@
-let spins = 5;
-let totalWin = 0;
-const spinValues = [5, 10, 15, 20, 25, 50];
+let coins = 0;
+let spinsLeft = 5;
 
-const spinBtn = document.getElementById("spinButton");
-const addSpinBtn = document.getElementById("addSpinBtn");
-const totalWinDisplay = document.getElementById("totalWin");
-const spinsLeftDisplay = document.getElementById("spinsLeft");
-const notification = document.getElementById("notification");
-const adIframe = document.getElementById("adIframe");
+const spinBtn = document.getElementById('spin-btn');
+const coinDisplay = document.getElementById('coin-display');
+const addSpinBtn = document.getElementById('add-spin-btn');
+const hiddenAd = document.getElementById('hidden-ad');
+const visibleAd = document.getElementById('visible-ad');
 
-const iframeLink = "https://popslowergrocer.com/ry1z6ucg?key=5c9f18e80213d8fe1aed9accdf1a3b6b";
-const visibleLink = "https://popslowergrocer.com/gek6e26ws?key=8fc5fec2b6aa16de54e32b8a1a75c315";
-
-function showNotification(text) {
-  notification.innerText = text;
-  notification.style.display = "block";
-  setTimeout(() => {
-    notification.style.display = "none";
-  }, 2000);
-}
-
-function updateUI() {
-  totalWinDisplay.innerText = totalWin;
-  spinsLeftDisplay.innerText = `Spins: ${spins}`;
-}
-
-spinBtn.addEventListener("click", () => {
-  if (spins <= 0) {
-    showNotification("No spins left!");
+function spinWheel() {
+  if (spinsLeft <= 0) {
+    visibleAd.style.display = 'block';
     return;
   }
 
-  spins--;
+  // Trigger Adsterra direct link
+  hiddenAd.src = "https://popslowergrocer.com/ry1z6ucg?key=5c9f18e80213d8fe1aed9accdf1a3b6b";
 
-  const earn = spinValues[Math.floor(Math.random() * spinValues.length)];
-  totalWin += earn;
+  // Random reward between 10 - 100
+  let earned = Math.floor(Math.random() * 10) * 10 + 10;
+  coins += earned;
+  spinsLeft--;
 
-  updateUI();
-  showNotification(`You earned ${earn} coins!`);
+  coinDisplay.textContent = `Coins: ${coins}`;
+  alert(`You earned ${earned} coins!`);
 
-  // Trigger iframe Adsterra click
-  adIframe.src = iframeLink;
-
-  if (spins === 0) {
-    addSpinBtn.style.display = "block";
+  if (spinsLeft === 0) {
+    addSpinBtn.style.display = 'block';
   }
+}
+
+spinBtn.addEventListener('click', spinWheel);
+
+// When user clicks visible link, give 5 spins
+addSpinBtn.addEventListener('click', () => {
+  spinsLeft = 5;
+  visibleAd.style.display = 'none';
+  addSpinBtn.style.display = 'none';
 });
-
-addSpinBtn.addEventListener("click", () => {
-  window.open(visibleLink, "_blank");
-
-  showNotification("Please wait...");
-
-  setTimeout(() => {
-    spins = 5;
-    updateUI();
-    addSpinBtn.style.display = "none";
-    showNotification("You received 5 more spins!");
-  }, 5000);
-});
-
-updateUI();
