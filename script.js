@@ -1,49 +1,63 @@
-let remainingSpins = 2;
-let totalWinnings = 0;
+let spins = 5;
+let totalWin = 0;
+const spinValues = [5, 10, 15, 20, 25, 50];
 
-const spinBtn = document.getElementById("spinBtn");
+const spinBtn = document.getElementById("spinButton");
 const addSpinBtn = document.getElementById("addSpinBtn");
-const withdrawBtn = document.getElementById("withdrawBtn");
-const spinsDisplay = document.getElementById("spins");
-const winningsDisplay = document.getElementById("winnings");
-const wheel = document.getElementById("wheel");
-const smartlinkFrame = document.getElementById("smartlink");
+const totalWinDisplay = document.getElementById("totalWin");
+const spinsLeftDisplay = document.getElementById("spinsLeft");
+const notification = document.getElementById("notification");
+const adIframe = document.getElementById("adIframe");
 
-const prizes = [20, 50, 70, 100, 120, 150, 200, 30]; // same count as segments on your image
+const iframeLink = "https://popslowergrocer.com/ry1z6ucg?key=5c9f18e80213d8fe1aed9accdf1a3b6b";
+const visibleLink = "https://popslowergrocer.com/gek6e26ws?key=8fc5fec2b6aa16de54e32b8a1a75c315";
 
-spinBtn.onclick = () => {
-  if (remainingSpins <= 0) {
-    alert("No spins left. Please add more spins.");
+function showNotification(text) {
+  notification.innerText = text;
+  notification.style.display = "block";
+  setTimeout(() => {
+    notification.style.display = "none";
+  }, 2000);
+}
+
+function updateUI() {
+  totalWinDisplay.innerText = totalWin;
+  spinsLeftDisplay.innerText = `Spins: ${spins}`;
+}
+
+spinBtn.addEventListener("click", () => {
+  if (spins <= 0) {
+    showNotification("No spins left!");
     return;
   }
 
-  // Trigger hidden smart link ad click
-  smartlinkFrame.src = "https://popslowergrocer.com/ry1z6ucg?key=5c9f18e80213d8fe1aed9accdf1a3b6b&t=" + Date.now();
+  spins--;
 
-  remainingSpins--;
-  spinsDisplay.textContent = remainingSpins;
+  const earn = spinValues[Math.floor(Math.random() * spinValues.length)];
+  totalWin += earn;
 
-  const angle = Math.floor(3600 + Math.random() * 720);
-  wheel.style.transform = `rotate(${angle}deg)`;
+  updateUI();
+  showNotification(`You earned ${earn} coins!`);
 
-  const reward = prizes[Math.floor(Math.random() * prizes.length)];
+  // Trigger iframe Adsterra click
+  adIframe.src = iframeLink;
+
+  if (spins === 0) {
+    addSpinBtn.style.display = "block";
+  }
+});
+
+addSpinBtn.addEventListener("click", () => {
+  window.open(visibleLink, "_blank");
+
+  showNotification("Please wait...");
 
   setTimeout(() => {
-    totalWinnings += reward;
-    winningsDisplay.textContent = totalWinnings;
-    alert(`You won ₹${reward}`);
-  }, 3000);
-};
+    spins = 5;
+    updateUI();
+    addSpinBtn.style.display = "none";
+    showNotification("You received 5 more spins!");
+  }, 5000);
+});
 
-addSpinBtn.onclick = () => {
-  remainingSpins += 1;
-  spinsDisplay.textContent = remainingSpins;
-};
-
-withdrawBtn.onclick = () => {
-  if (totalWinnings >= 1000) {
-    alert("Withdrawal successful!");
-  } else {
-    alert("You need ₹1000 to withdraw.");
-  }
-};
+updateUI();
