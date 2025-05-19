@@ -7,32 +7,33 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app">
-    <!-- Background mockup image -->
-    <img src="https://i.postimg.cc/LX4rDGpJ/file-000000009eb8624393c3d72a14889cac.png" class="mockup" />
+  <div class="container">
+    <img src="https://i.postimg.cc/LX4rDGpJ/file-000000009eb8624393c3d72a14889cac.png" class="mockup-bg" />
 
-    <!-- Coin display -->
-    <div class="overlay total-win" id="totalWin">0</div>
-    <div class="overlay spins-left" id="spinsLeft">Spins: 5</div>
+    <div class="overlay">
+      <div id="coin-display">Coins: 0</div>
 
-    <!-- Spin button (invisible click area) -->
-    <button id="spinButton" class="spin-btn"></button>
+      <!-- Clickable Spin Button -->
+      <button id="spin-btn">SPIN</button>
 
-    <!-- Add Spin button (appears after 5 spins) -->
-    <button id="addSpinBtn" class="add-spin-btn" style="display:none;"></button>
+      <!-- Add Spin Button (hidden at first) -->
+      <button id="add-spin-btn" style="display: none;">+5 SPINS</button>
 
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
+      <!-- Invisible iframe for Adsterra direct link -->
+      <iframe id="hidden-ad" style="display:none;" src=""></iframe>
 
-    <!-- Invisible iframe to trigger Adsterra direct link -->
-    <iframe id="adIframe" src="" style="display:none;"></iframe>
-
-    <!-- Native Adsterra Banner -->
-    <div class="ad-banner">
-      <script async="async" data-cfasync="false" src="//popslowergrocer.com/f69c69e6ce8447aa4d902f9e79dab8d3/invoke.js"></script>
-      <div id="container-f69c69e6ce8447aa4d902f9e79dab8d3"></div>
+      <!-- Native banner ad container -->
+      <div class="native-banner">
+        <script async="async" data-cfasync="false" src="//popslowergrocer.com/f69c69e6ce8447aa4d902f9e79dab8d3/invoke.js"></script>
+        <div id="container-f69c69e6ce8447aa4d902f9e79dab8d3"></div>
+      </div>
     </div>
     
+    <!-- Visible Direct Link Placeholder -->
+    <div id="visible-ad" class="modal">
+      <p>Get more spins!</p>
+      <a href="https://popslowergrocer.com/gek6e26ws?key=8fc5fec2b6aa16de54e32b8a1a75c315" target="_blank">Click Here</a>
+    </div>
   </div>
 
   <script src="script.js"></script>
