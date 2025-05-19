@@ -4,36 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Spin & Earn</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Spin & Earn</h1>
+  <div class="app">
+    <!-- Background mockup image -->
+    <img src="https://i.postimg.cc/LX4rDGpJ/file-000000009eb8624393c3d72a14889cac.png" class="mockup" />
 
-    <!-- Spins & Winnings -->
-    <div class="stats">
-      <div><strong id="spins">2</strong><br/>Remaining Spin</div>
-      <div><strong id="winnings">0</strong><br/>Winnings</div>
-    </div>
+    <!-- Coin display -->
+    <div class="overlay total-win" id="totalWin">0</div>
+    <div class="overlay spins-left" id="spinsLeft">Spins: 5</div>
 
-    <button id="addSpinBtn">Add Spin</button>
-    <button id="withdrawBtn">Withdraw</button>
+    <!-- Spin button (invisible click area) -->
+    <button id="spinButton" class="spin-btn"></button>
 
-    <!-- Adsterra Banner -->
+    <!-- Add Spin button (appears after 5 spins) -->
+    <button id="addSpinBtn" class="add-spin-btn" style="display:none;"></button>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Invisible iframe to trigger Adsterra direct link -->
+    <iframe id="adIframe" src="" style="display:none;"></iframe>
+
+    <!-- Native Adsterra Banner -->
     <div class="ad-banner">
-      <script async="async" data-cfasync="false" src="//popslowergrocer.com/f6483c45a76970bebdf173069e56f10e/invoke.js"></script>
-      <div id="container-f6483c45a76970bebdf173069e56f10e"></div>
+      <script async="async" data-cfasync="false" src="//popslowergrocer.com/f69c69e6ce8447aa4d902f9e79dab8d3/invoke.js"></script>
+      <div id="container-f69c69e6ce8447aa4d902f9e79dab8d3"></div>
     </div>
-
-    <!-- Wheel -->
-    <div class="wheel-section">
-      <img id="wheel" src="wheel.png" alt="Spin Wheel" />
-      <button id="spinBtn">SPIN NOW</button>
-    </div>
+    
   </div>
-
-  <!-- Hidden Adsterra Smartlink Trigger -->
-  <iframe id="smartlink" style="display:none;"></iframe>
 
   <script src="script.js"></script>
 </body>
