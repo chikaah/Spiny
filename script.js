@@ -1,39 +1,53 @@
-let coins = 0;
-let spinsLeft = 5;
+document.addEventListener('DOMContentLoaded', () => {
+    const spinNowBtn = document.getElementById('spin-now-btn');
+    const addSpinBtn = document.getElementById('add-spin-btn');
+    const withdrawBtn = document.getElementById('withdraw-btn');
+    const remainingSpinsDisplay = document.getElementById('remaining-spins');
+    const winningsDisplay = document.getElementById('winnings');
+    const spinWheel = document.getElementById('spin-wheel');
 
-const spinBtn = document.getElementById('spin-btn');
-const coinDisplay = document.getElementById('coin-display');
-const addSpinBtn = document.getElementById('add-spin-btn');
-const hiddenAd = document.getElementById('hidden-ad');
-const visibleAd = document.getElementById('visible-ad');
+    let remainingSpins = 2;
+    let winnings = 0;
 
-function spinWheel() {
-  if (spinsLeft <= 0) {
-    visibleAd.style.display = 'block';
-    return;
-  }
+    function updateDisplay() {
+        remainingSpinsDisplay.textContent = remainingSpins;
+        winningsDisplay.textContent = winnings;
+    }
 
-  // Trigger Adsterra direct link
-  hiddenAd.src = "https://popslowergrocer.com/ry1z6ucg?key=5c9f18e80213d8fe1aed9accdf1a3b6b";
+    spinNowBtn.addEventListener('click', () => {
+        if (remainingSpins > 0) {
+            remainingSpins--;
+            // Placeholder for spinning logic and win calculation
+            console.log('Spinning the wheel...');
+            // In a real app, you'd add animation and calculate win here
+            // For now, let's just simulate a win
+            const simulatedWin = Math.floor(Math.random() * 200); // Random win
+            winnings += simulatedWin;
+            alert(`You won ${simulatedWin} points! Total winnings: ${winnings}`);
 
-  // Random reward between 10 - 100
-  let earned = Math.floor(Math.random() * 10) * 10 + 10;
-  coins += earned;
-  spinsLeft--;
+        } else {
+            alert('No remaining spins! Click "Add Spin" to get more.');
+        }
+        updateDisplay();
+    });
 
-  coinDisplay.textContent = `Coins: ${coins}`;
-  alert(`You earned ${earned} coins!`);
+    addSpinBtn.addEventListener('click', () => {
+        // For demonstration, just add 1 spin
+        remainingSpins += 1;
+        alert('1 spin added!');
+        updateDisplay();
+    });
 
-  if (spinsLeft === 0) {
-    addSpinBtn.style.display = 'block';
-  }
-}
+    withdrawBtn.addEventListener('click', () => {
+        if (winnings > 0) {
+            alert(`Withdrawing ${winnings} points. (This is a placeholder. Real withdrawal requires backend.)`);
+            winnings = 0; // Reset winnings after simulated withdrawal
+        } else {
+            alert('No winnings to withdraw.');
+        }
+        updateDisplay();
+    });
 
-spinBtn.addEventListener('click', spinWheel);
-
-// When user clicks visible link, give 5 spins
-addSpinBtn.addEventListener('click', () => {
-  spinsLeft = 5;
-  visibleAd.style.display = 'none';
-  addSpinBtn.style.display = 'none';
+    // Initial display update
+    updateDisplay();
 });
