@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Spin & Earn</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin & Earn</title>
+    <link rel="stylesheet" href="style.css"> </head>
 <body>
-  <div class="container">
-    <img src="https://i.postimg.cc/LX4rDGpJ/file-000000009eb8624393c3d72a14889cac.png" class="mockup-bg" />
-
-    <div class="overlay">
-      <div id="coin-display">Coins: 0</div>
-
-      <!-- Clickable Spin Button -->
-      <button id="spin-btn">SPIN</button>
-
-      <!-- Add Spin Button (hidden at first) -->
-      <button id="add-spin-btn" style="display: none;">+5 SPINS</button>
-
-      <!-- Invisible iframe for Adsterra direct link -->
-      <iframe id="hidden-ad" style="display:none;" src=""></iframe>
-
-      <!-- Native banner ad container -->
-      <div class="native-banner">
-        <script async="async" data-cfasync="false" src="//popslowergrocer.com/f69c69e6ce8447aa4d902f9e79dab8d3/invoke.js"></script>
-        <div id="container-f69c69e6ce8447aa4d902f9e79dab8d3"></div>
-      </div>
+    <div class="container">
+        <h1>SPIN & EARN</h1>
+        <div class="stats">
+            <div class="stat-box">
+                <p id="remaining-spins">2</p>
+                <span>Remaining Spin</span>
+            </div>
+            <div class="stat-box">
+                <p id="winnings">0</p>
+                <span>Winnings</span>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="add-spin-btn">Add Spin</button>
+            <button id="withdraw-btn">Withdraw</button>
+        </div>
+        <div class="advertisement">ADVERTISEMENT</div>
+        <div class="wheel-container">
+            <div class="wheel" id="spin-wheel">
+                <div class="segment segment-1">20</div>
+                <div class="segment segment-2">10</div>
+                <div class="segment segment-3">150</div>
+                </div>
+            <div class="pointer"></div>
+        </div>
+        <button id="spin-now-btn">SPIN NOW</button>
     </div>
-    
-    <!-- Visible Direct Link Placeholder -->
-    <div id="visible-ad" class="modal">
-      <p>Get more spins!</p>
-      <a href="https://popslowergrocer.com/gek6e26ws?key=8fc5fec2b6aa16de54e32b8a1a75c315" target="_blank">Click Here</a>
-    </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script> </body>
 </html>
