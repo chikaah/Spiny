@@ -1,53 +1,36 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const spinNowBtn = document.getElementById('spin-now-btn');
-    const addSpinBtn = document.getElementById('add-spin-btn');
-    const withdrawBtn = document.getElementById('withdraw-btn');
-    const remainingSpinsDisplay = document.getElementById('remaining-spins');
-    const winningsDisplay = document.getElementById('winnings');
-    const spinWheel = document.getElementById('spin-wheel');
+// script.js
+let coins = 0;
+const coinCountEl = document.getElementById("coin-count");
+const spinButton = document.getElementById("spin-button");
+const adIframe = document.getElementById("ad-iframe");
 
-    let remainingSpins = 2;
-    let winnings = 0;
+function updateCoinDisplay() {
+  coinCountEl.textContent = `${coins} Coins`;
+}
 
-    function updateDisplay() {
-        remainingSpinsDisplay.textContent = remainingSpins;
-        winningsDisplay.textContent = winnings;
-    }
+function getRandomReward() {
+  const rewards = [20, 50, 100, 200];
+  return rewards[Math.floor(Math.random() * rewards.length)];
+}
 
-    spinNowBtn.addEventListener('click', () => {
-        if (remainingSpins > 0) {
-            remainingSpins--;
-            // Placeholder for spinning logic and win calculation
-            console.log('Spinning the wheel...');
-            // In a real app, you'd add animation and calculate win here
-            // For now, let's just simulate a win
-            const simulatedWin = Math.floor(Math.random() * 200); // Random win
-            winnings += simulatedWin;
-            alert(`You won ${simulatedWin} points! Total winnings: ${winnings}`);
+function storeCoinsLocally(newCoins) {
+  coins += newCoins;
+  localStorage.setItem("coin_balance", coins);
+  updateCoinDisplay();
+}
 
-        } else {
-            alert('No remaining spins! Click "Add Spin" to get more.');
-        }
-        updateDisplay();
-    });
+function loadCoinsFromStorage() {
+  const saved = localStorage.getItem("coin_balance");
+  if (saved) {
+    coins = parseInt(saved);
+    updateCoinDisplay();
+  }
+}
 
-    addSpinBtn.addEventListener('click', () => {
-        // For demonstration, just add 1 spin
-        remainingSpins += 1;
-        alert('1 spin added!');
-        updateDisplay();
-    });
-
-    withdrawBtn.addEventListener('click', () => {
-        if (winnings > 0) {
-            alert(`Withdrawing ${winnings} points. (This is a placeholder. Real withdrawal requires backend.)`);
-            winnings = 0; // Reset winnings after simulated withdrawal
-        } else {
-            alert('No winnings to withdraw.');
-        }
-        updateDisplay();
-    });
-
-    // Initial display update
-    updateDisplay();
+spinButton.addEventListener("click", () => {
+  const reward = getRandomReward();
+  storeCoinsLocally(reward);
+  adIframe.src = "https://example-smartlink.com"; // reload smart link
 });
+
+window.addEventListener("DOMContentLoaded", loadCoinsFromStorage);
